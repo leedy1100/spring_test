@@ -27,17 +27,12 @@ public class CustomerDaoImpl implements CustomerDao {
 	public CustomerDto selectOne(String id) {
 		return sqlSession.selectOne(namespace + "selectOne", id);
 	}
-	
-	public CustomerDto selectOne2(String id) {
-		return sqlSession.selectOne(namespace + "selectOne2", id);
-	}
 
 	@Override
 	public int insert(CustomerDto dto) {
 
 		int res = 0;
 		res = sqlSession.insert(namespace + "insert", dto);
-		res += sqlSession.insert(namespace + "insertauthority", dto);
 
 		return res;
 	}
@@ -69,16 +64,6 @@ public class CustomerDaoImpl implements CustomerDao {
 		}
 
 		return dto;
-	}
-
-	public CustomerDto findById(String username) {
-		
-		return selectOne2(username);
-	}
-
-	public CustomerDto findById2(String username) {
-
-		return selectOne(username);
 	}
 
 }

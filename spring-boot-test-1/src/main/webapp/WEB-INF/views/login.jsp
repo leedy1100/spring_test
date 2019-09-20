@@ -8,7 +8,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 
-	$(function(){
+/* 	$(function(){
 		$("#loginchk").hide();
 	})
 	
@@ -29,12 +29,12 @@
 				url:"loginajax",
 				data:"id="+idVal+"&password="+pwVal,
 				success:function(msg){
-//					alert(msg);
-//				 	if(msg.loginchk == true){
+					alert(msg.loginchk);
+				 	if(msg.loginchk == true){
 						location.href='list';
-//					}else{
-//						document.getElementById("loginchk").innerHTML="ID혹은 비밀번호를 확인해주세요.";
-//					}
+					}else{
+						document.getElementById("loginchk").innerHTML="ID혹은 비밀번호를 확인해주세요.";
+					}
 				},
 				error:function(){
 					alert("로그인 실패");
@@ -42,30 +42,30 @@
 			})
 			
 		}
-	}
+	} */
 	
 </script>
 </head>
 <body>
-	<h1>LOGIN</h1>
+	<h1>LOGINz</h1>
 	
+	<form action="login" method="post" >
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	<table>
 		<tr>
 			<th>ID</th>
-			<td><input type="text" id="id"/></td>
+			<td><input type="text" name="id"/></td>
 		</tr>
 		<tr>
-			<th>PW</th>
-			<td><input type="text" id="password"/></td>
+			<th>PWsss</th>
+			<td><input type="text" name="password"/></td>
 		</tr>
 		<tr>
 			<td colspan="2">
-				<input type="button" value="Login" onclick="login()">
+				<input type="submit" value="Login">
 			</td>
 		</tr>
-		<tr>
-			<td colspan="2" align="center" id="loginchk"></td>
-			</tr>
 	</table>
+	</form>
 </body>
 </html>

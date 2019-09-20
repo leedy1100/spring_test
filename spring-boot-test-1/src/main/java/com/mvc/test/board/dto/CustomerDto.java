@@ -1,39 +1,45 @@
 package com.mvc.test.board.dto;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public class CustomerDto implements UserDetails {
+public class CustomerDto implements UserDetails{
 
 	private String id;
 	private String password;
 	private String name;
+	private String authority;
 	private boolean isAccouontNonExpired;
 	private boolean isAccountNonLocked;
 	private boolean isCredentialsNonExpired;
 	private boolean isEnabled;
-	private String authority;
-	private Collection<? extends GrantedAuthority> authorities;
 
 	public CustomerDto() {
 
 	}
-
+	
 	public CustomerDto(String id, String password, String name) {
+		super();
 		this.id = id;
 		this.password = password;
 		this.name = name;
+	}
+
+	public String getId() {
+		return id;
 	}
 
 	public void setId(String id) {
 		this.id = id;
 	}
 
-	public String getId() {
-
-		return id;
+	public String getPassword() {
+		return password;
 	}
 
 	public void setPassword(String password) {
@@ -44,6 +50,10 @@ public class CustomerDto implements UserDetails {
 		return name;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public boolean isAccouontNonExpired() {
 		return isAccouontNonExpired;
 	}
@@ -52,24 +62,28 @@ public class CustomerDto implements UserDetails {
 		this.isAccouontNonExpired = isAccouontNonExpired;
 	}
 
+	public boolean isAccountNonLocked() {
+		return isAccountNonLocked;
+	}
+
 	public void setAccountNonLocked(boolean isAccountNonLocked) {
 		this.isAccountNonLocked = isAccountNonLocked;
+	}
+
+	public boolean isCredentialsNonExpired() {
+		return isCredentialsNonExpired;
 	}
 
 	public void setCredentialsNonExpired(boolean isCredentialsNonExpired) {
 		this.isCredentialsNonExpired = isCredentialsNonExpired;
 	}
 
+	public boolean isEnabled() {
+		return isEnabled;
+	}
+
 	public void setEnabled(boolean isEnabled) {
 		this.isEnabled = isEnabled;
-	}
-
-	public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
-		this.authorities = authorities;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getAuthority() {
@@ -80,45 +94,24 @@ public class CustomerDto implements UserDetails {
 		this.authority = authority;
 	}
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return this.authorities;
-	}
 
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
-		return this.id;
-	}
-
-	@Override
-	public String getPassword() {
-		return this.password;
+		return id;
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return this.isAccouontNonExpired;
+		return isAccouontNonExpired;
 	}
 
 	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return this.isAccountNonLocked;
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();   
+        authorities.add(new SimpleGrantedAuthority(authority));
+        return authorities;
+
 	}
 
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return this.isCredentialsNonExpired;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return this.isEnabled;
-	}
-
+	
 }

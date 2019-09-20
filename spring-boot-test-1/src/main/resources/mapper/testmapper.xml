@@ -7,9 +7,8 @@
 		FROM TB_CUSTOMER
 	</select>
 	<select id="selectOne" resultType="customerDto">
-		SELECT *
-		FROM
-		TB_CUSTOMER
+		SELECT ID, PASSWORD, NAME, AUTHORITY, ISACCOUNTNONEXPIRED, ISACCOUNTNONLOCKED, ISCREDENTIALNONEXPIRED, ISENABLED
+		FROM TB_CUSTOMER
 		WHERE ID = #{id}
 	</select>
 	
@@ -22,7 +21,7 @@
 
 	<insert id="insert" parameterType="customerDto">
 		INSERT INTO TB_CUSTOMER
-		VALUES(#{id},#{password},#{name},1,1,1,1)
+		VALUES(#{id},#{password},#{name},#{authority},1,1,1,1)
 	</insert>
 
 	<update id="update" parameterType="customerDto">
@@ -39,13 +38,9 @@
 	</delete>
 	
 	<select id="login" parameterType="map" resultType="customerDto">
-		SELECT ID, PASSWORD, NAME
+		SELECT *
 		FROM TB_CUSTOMER
 		WHERE ID = #{id} AND PASSWORD = #{pw}
 	</select>
 
-	<insert id="insertauthority" parameterType="customerDto">
-		INSERT INTO AUTHORITIES
-		VALUES(#{id},#{authority})
-	</insert>
 </mapper>

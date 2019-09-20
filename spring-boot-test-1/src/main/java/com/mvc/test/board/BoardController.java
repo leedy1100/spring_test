@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,13 +16,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mvc.test.board.biz.CustomerBiz;
+import com.mvc.test.board.biz.CustomerBizImpl;
 import com.mvc.test.board.dto.CustomerDto;
 
 @Controller
 public class BoardController {
 
 	@Autowired
-	CustomerBiz biz;
+	CustomerBizImpl biz;
 	
 	@RequestMapping("/")
 	public String index() {
@@ -118,23 +120,22 @@ public class BoardController {
 		return "login";
 	}
 
-	@RequestMapping("/loginajax")
-	@ResponseBody
-	public Map<String, Boolean> loginAjax(String id, String password, HttpSession session) {
-		// @ResponseBody : java 객체를 response 객체에 binding ,응답하면 요청되는 바디에 바로 넣어준다
-
-		CustomerDto dto = biz.login(id, password);
-		
-		boolean loginchk = false;
-		
-		if (dto != null) {
-			session.setAttribute("dto", dto);
-			loginchk = true;
-		}
-		
-		Map<String, Boolean> map = new HashMap<String, Boolean>();
-		map.put("loginchk", loginchk);
-
-		return map;
-	}
+//	@RequestMapping("/loginajax")
+//	@ResponseBody
+//	public Map<String, Boolean> loginAjax(String id, String password, HttpSession session) {
+//		// @ResponseBody : java 객체를 response 객체에 binding ,응답하면 요청되는 바디에 바로 넣어준다
+//
+//		UserDetails userDetails =  biz.loadUserByUsername(id);
+//		
+//		boolean loginchk = false;
+//		
+//		if (userDetails != null) {
+//			loginchk = true;
+//		}
+//		
+//		Map<String, Boolean> map = new HashMap<String, Boolean>();
+//		map.put("loginchk", loginchk);
+//
+//		return map;
+//	}
 }
