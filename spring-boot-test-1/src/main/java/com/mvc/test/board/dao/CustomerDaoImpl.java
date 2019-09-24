@@ -25,7 +25,11 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	@Override
 	public CustomerDto selectOne(String id) {
-		return sqlSession.selectOne(namespace + "selectOne", id);
+		
+		CustomerDto dto = null;;
+		dto = sqlSession.selectOne(namespace + "selectOne", id);
+		
+		return dto;
 	}
 
 	@Override

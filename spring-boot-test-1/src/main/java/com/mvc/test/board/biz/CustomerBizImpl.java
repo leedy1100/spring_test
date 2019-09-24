@@ -13,7 +13,7 @@ import com.mvc.test.board.dao.CustomerDaoImpl;
 import com.mvc.test.board.dto.CustomerDto;
 
 @Service
-public class CustomerBizImpl implements CustomerBiz {
+public class CustomerBizImpl implements CustomerBiz, UserDetailsService {
 
 	@Autowired
 	private CustomerDaoImpl dao;
@@ -59,5 +59,21 @@ public class CustomerBizImpl implements CustomerBiz {
 		return dao.login(id, pw);
 	}
 
+	@Override
+	public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
+		System.out.println("입력한 ID는 : "+ id);
+		CustomerDto dto = dao.selectOne(id);
+		System.out.println("dto는 : " + dto);
+		if(dto == null) {
+			System.out.println("dto: " +dto);
+			System.out.println("loadUserByUsername : not existed user");
+			throw new UsernameNotFoundException("login fail");
+		}
+		
+		return new CustomerMember(dto);
+	}
+
+
+	
 
 }
