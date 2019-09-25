@@ -16,5 +16,4 @@ public interface CustomerBiz {
 
 	public int delete(String id);
 	
-	public CustomerDto login(String id, String pw);
 }

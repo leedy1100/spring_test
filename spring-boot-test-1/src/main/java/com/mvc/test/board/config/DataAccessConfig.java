@@ -9,6 +9,8 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @MapperScan(basePackages = "com.mvc.test.board.dao")
@@ -28,5 +30,10 @@ public class DataAccessConfig {
     @Bean
 	public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
+    }
+    
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+    	return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }

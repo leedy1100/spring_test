@@ -17,7 +17,7 @@ public class CustomerBizImpl implements CustomerBiz, UserDetailsService {
 
 	@Autowired
 	private CustomerDaoImpl dao;
-	@Autowired
+	@Autowired 
 	PasswordEncoder passwordEncoder;
 
 	@Override
@@ -55,25 +55,16 @@ public class CustomerBizImpl implements CustomerBiz, UserDetailsService {
 	}
 
 	@Override
-	public CustomerDto login(String id, String pw) {
-		return dao.login(id, pw);
-	}
-
-	@Override
 	public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
-		System.out.println("입력한 ID는 : "+ id);
 		CustomerDto dto = dao.selectOne(id);
 		System.out.println("dto는 : " + dto);
 		if(dto == null) {
-			System.out.println("dto: " +dto);
 			System.out.println("loadUserByUsername : not existed user");
 			throw new UsernameNotFoundException("login fail");
 		}
 		
-		return new CustomerMember(dto);
+		return dto;
 	}
 
-
-	
 
 }

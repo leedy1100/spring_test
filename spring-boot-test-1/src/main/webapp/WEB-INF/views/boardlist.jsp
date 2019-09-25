@@ -36,7 +36,11 @@
 			<td colspan="2"><input type="button" onclick="location.href='insert'" value="고객추가" /></td>
 		</tr>
 	</table>
-	
-	<a href="logout">logout</a>
+	<form action="logout" method="post">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		<input type="submit" value="logout">
+	</form>
+	<a href="user/userpage">user권한</a>
+	<a href="admin/adminpage">admin권한</a>
 </body>
 </html>

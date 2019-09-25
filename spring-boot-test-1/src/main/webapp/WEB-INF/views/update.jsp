@@ -25,6 +25,10 @@
 			<td><input type="text" value="${dto.password }" name="password"/></td>
 		</tr>
 		<tr>
+			<th>ROLE</th>
+			<td><input type="text" value="${dto.authority }" name="password"/></td>
+		</tr>
+		<tr>
 			<td colspan="3">
 				<input type="submit" value="수정">
 				<input type="button" value="취소" onclick="location.href='selectone?id=${dto.id}'">
