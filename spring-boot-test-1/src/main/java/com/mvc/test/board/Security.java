@@ -20,7 +20,7 @@ public class Security extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception
 	{
-		//web.ignoring().antMatchers("/favicon.ico", "/css/**", "/image/**", "/js/**","/resource/**","/insert","/insertres");
+		web.ignoring().antMatchers("/favicon.ico", "/css/**", "/image/**", "/js/**","/resource/**","/insert","/insertres");
 	}
 	
     @Override
@@ -45,6 +45,7 @@ public class Security extends WebSecurityConfigurerAdapter {
                 	.logoutUrl("/logout")
                 	.logoutSuccessUrl("/")
                 	.invalidateHttpSession(true)
+                	.permitAll()
                 	.and()
                 .csrf()
                 	.and()
