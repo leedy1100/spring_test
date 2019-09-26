@@ -11,13 +11,6 @@
 		FROM TB_CUSTOMER
 		WHERE ID = #{id}
 	</select>
-	
-	<select id="selectOne2" resultType="customerDto">
-		SELECT *
-		FROM
-		AUTHORITIES
-		WHERE ID = #{id}
-	</select>
 
 	<insert id="insert" parameterType="customerDto">
 		INSERT INTO TB_CUSTOMER

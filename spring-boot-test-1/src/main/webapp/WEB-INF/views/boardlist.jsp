@@ -42,5 +42,6 @@
 	</form>
 	<a href="user/userpage">user권한</a>
 	<a href="admin/adminpage">admin권한</a>
+	<a href="http://localhost:8787/mvc03_log_login/">spring mvc이동</a>
 </body>
 </html>

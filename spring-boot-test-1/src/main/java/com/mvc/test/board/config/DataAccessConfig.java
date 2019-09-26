@@ -13,7 +13,6 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-@MapperScan(basePackages = "com.mvc.test.board.dao")
 public class DataAccessConfig {
 
     @Bean
