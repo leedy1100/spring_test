@@ -8,7 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public class CustomerDto implements UserDetails{
+public class CustomerDto implements UserDetails {
 
 	private String id;
 	private String password;
@@ -22,7 +22,7 @@ public class CustomerDto implements UserDetails{
 	public CustomerDto() {
 
 	}
-	
+
 	public CustomerDto(String id, String password, String name) {
 		super();
 		this.id = id;
@@ -54,32 +54,16 @@ public class CustomerDto implements UserDetails{
 		this.name = name;
 	}
 
-	public boolean isAccouontNonExpired() {
-		return isAccouontNonExpired;
-	}
-
 	public void setAccouontNonExpired(boolean isAccouontNonExpired) {
 		this.isAccouontNonExpired = isAccouontNonExpired;
-	}
-
-	public boolean isAccountNonLocked() {
-		return isAccountNonLocked;
 	}
 
 	public void setAccountNonLocked(boolean isAccountNonLocked) {
 		this.isAccountNonLocked = isAccountNonLocked;
 	}
 
-	public boolean isCredentialsNonExpired() {
-		return isCredentialsNonExpired;
-	}
-
 	public void setCredentialsNonExpired(boolean isCredentialsNonExpired) {
 		this.isCredentialsNonExpired = isCredentialsNonExpired;
-	}
-
-	public boolean isEnabled() {
-		return isEnabled;
 	}
 
 	public void setEnabled(boolean isEnabled) {
@@ -94,7 +78,25 @@ public class CustomerDto implements UserDetails{
 		this.authority = authority;
 	}
 
+	@Override
+	public boolean isAccountNonLocked() {
+		return isAccountNonLocked;
+	}
 
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return isCredentialsNonExpired;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return isEnabled;
+	}
+
+	public void setUsername(String id) {
+		this.id = id;
+	}
+	
 	@Override
 	public String getUsername() {
 		return id;
@@ -107,11 +109,10 @@ public class CustomerDto implements UserDetails{
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();   
-        authorities.add(new SimpleGrantedAuthority(authority));
-        return authorities;
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		authorities.add(new SimpleGrantedAuthority(authority));
+		return authorities;
 
 	}
 
-	
 }

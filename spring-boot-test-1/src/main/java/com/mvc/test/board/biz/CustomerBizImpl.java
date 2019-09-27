@@ -60,7 +60,7 @@ public class CustomerBizImpl implements CustomerBiz, UserDetailsService {
 		System.out.println("dto는 : " + dto);
 		if(dto == null) {
 			System.out.println("loadUserByUsername : not existed user");
-			throw new UsernameNotFoundException("login fail");
+			throw new UsernameNotFoundException("아이디가 존재하지 않습니다.");
 		}
 		
 		return dto;

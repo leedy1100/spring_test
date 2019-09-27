@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix ="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
+<%@ page import="org.springframework.security.core.Authentication" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,12 +39,25 @@
 			<td colspan="2"><input type="button" onclick="location.href='insert'" value="고객추가" /></td>
 		</tr>
 	</table>
-	<form action="logout" method="post">
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-		<input type="submit" value="logout">
-	</form>
 	<a href="user/userpage">user권한</a>
 	<a href="admin/adminpage">admin권한</a>
 	<a href="http://localhost:8787/mvc03_log_login/">spring mvc이동</a>
+<%
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    Object principal = auth.getPrincipal();
+ 
+    String name = "";
+    if(principal != null) {
+        name = auth.getName();
+    }
+%>
+<sec:authorize access="isAuthenticated()">
+    <h5><%=name %>님, 반갑습니다.</h5>
+    <form action="logout" method="post">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		<input type="submit" value="logout">
+	</form>
+</sec:authorize>
+
 </body>
 </html>

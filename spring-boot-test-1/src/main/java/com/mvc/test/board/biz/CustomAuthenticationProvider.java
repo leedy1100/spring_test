@@ -3,6 +3,7 @@ package com.mvc.test.board.biz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -35,7 +36,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		
 		if(!dto.isEnabled()) {
 			System.out.println("ENABLE 오류!");
-            throw new BadCredentialsException("인증되지 않은 회원입니다.");
+            throw new  DisabledException("인증되지 않은 회원입니다.");
         }
 		System.out.println("provider끝!");
 		return new UsernamePasswordAuthenticationToken(id,password,dto.getAuthorities());
